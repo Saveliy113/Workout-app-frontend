@@ -1,19 +1,42 @@
+import { IoMdArrowBack } from 'react-icons/io';
+import { TfiUser } from 'react-icons/tfi';
+import { useLocation, useNavigate } from 'react-router-dom';
+
 import { useAuth } from '../../../hooks/useAuth';
-import styles from './Header.module.scss';
-import { FiArrowLeft } from 'react-icons/fi';
+
 import Hamburger from '../hamburger/Hamburger';
 
-const Header = ({ backLink }) => {
-  const { isAuth } = useAuth();
-  return (
-    <header className={styles.header}>
-      <button onClick={() => {}}>
-        <FiArrowLeft />
-      </button>
-      {/*User Profile*/}
-      <Hamburger />
-    </header>
-  );
+import styles from './Header.module.scss';
+
+const Header = ({ backLink = '/' }) => {
+	const { pathname } = useLocation();
+	const navigate = useNavigate();
+
+	const { isAuth } = useAuth();
+
+	return (
+		<header className={styles.header}>
+			{pathname !== '/' ? (
+				<button
+					onClick={() => {
+						navigate(backLink);
+					}}
+				>
+					<IoMdArrowBack />
+				</button>
+			) : (
+				<button
+					onClick={() => {
+						navigate(isAuth ? '/profile' : '/auth');
+					}}
+				>
+					<TfiUser />
+				</button>
+			)}
+
+			<Hamburger />
+		</header>
+	);
 };
 
 export default Header;
