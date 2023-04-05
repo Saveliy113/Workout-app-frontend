@@ -1,37 +1,24 @@
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
+
 
 import Loader from '../../ui/Loader';
 import Button from '../../ui/button/Button';
 import Field from '../../ui/field/Field';
 
+import AuthService from '../../../services/auth.service';
 import Layout from '../../layout/Layout';
 
 import styles from './Auth.module.scss';
-
-const isLoading = false;
-const isLoadingAuth = false;
+import { useAuthPage } from './useAuthPage';
 
 const Auth = () => {
-	const [type, setType] = useState('auth');
-
-	const {
-		register,
-		handleSubmit,
-		formState: { errors }
-	} = useForm({
-		mode: 'onChange'
-	});
-
-	const onSubmit = (data) => {
-		console.log(data);
-	};
+	const { errors, handleSubmit, isLoading, onSubmit, register, setType } =
+		useAuthPage();
 
 	return (
 		<>
 			<Layout heading="Sign in" bgImage="/images/auth-bg.png" />
 			<div className="wrapper-inner-page">
-				{(isLoading || isLoadingAuth) && <Loader />}
+				{isLoading && <Loader />}
 				<form onSubmit={handleSubmit(onSubmit)}>
 					<Field
 						error={errors?.email?.message}
@@ -55,7 +42,7 @@ const Auth = () => {
 						placeholder="Enter password"
 					/>
 					<div className={styles.wrapperButtons}>
-						<Button clickHandler={() => setType('auth')}>Sign in</Button>
+						<Button clickHandler={() => setType('login')}>Sign in</Button>
 						<Button clickHandler={() => setType('register')}>Sign up</Button>
 					</div>
 				</form>
