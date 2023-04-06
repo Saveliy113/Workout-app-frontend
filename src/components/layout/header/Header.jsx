@@ -16,25 +16,29 @@ const Header = ({ backLink = '/' }) => {
 
 	return (
 		<header className={styles.header}>
-			{pathname !== '/' || !isAuth ? (
-				<button
-					onClick={() => {
-						navigate(isAuth ? backLink : '/auth');
-					}}
-				>
-					<IoMdArrowBack />
-				</button>
-			) : (
-				<button
-					onClick={() => {
-						navigate('/profile');
-					}}
-				>
-					<TfiUser />
-				</button>
-			)}
+			{isAuth && (
+				<>
+					{pathname === '/' && isAuth ? (
+						<button
+							onClick={() => {
+								navigate('/profile');
+							}}
+						>
+							<TfiUser />
+						</button>
+					) : (
+						<button
+							onClick={() => {
+								navigate(isAuth ? backLink : '/auth');
+							}}
+						>
+							<IoMdArrowBack />
+						</button>
+					)}
 
-			{isAuth && <Hamburger />}
+					<Hamburger />
+				</>
+			)}
 		</header>
 	);
 };
