@@ -1,6 +1,6 @@
 import { $axios } from '../../api';
 
-const WORKOUTS = '/workouts';
+export const WORKOUTS = '/workouts';
 
 class WorkoutService {
 	async getAll() {
@@ -20,7 +20,7 @@ class WorkoutService {
 		return $axios.put(`${WORKOUTS}/${id}`, body);
 	}
 
-	async update(id) {
+	async delete(id) {
 		return $axios.delete(`${WORKOUTS}/${id}`);
 	}
 }

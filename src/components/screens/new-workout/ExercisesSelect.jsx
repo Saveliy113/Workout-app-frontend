@@ -9,7 +9,7 @@ import { useGetExercises } from './useGetExercises';
 const ExercisesSelect = ({ control }) => {
 	const { data, isLoading } = useGetExercises();
 
-	if (isLoading) 	return <Loader />;
+	if (isLoading) return <Loader />;
 
 	return (
 		<Controller
