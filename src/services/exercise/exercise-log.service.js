@@ -5,7 +5,7 @@ import { EXERCISES } from './exercise.service';
 const LOG = `${EXERCISES}/log`;
 
 class ExerciseLogService {
-	async getById() {
+	async getById(id) {
 		return $axios.get(`${LOG}/${id}`);
 	}
 
