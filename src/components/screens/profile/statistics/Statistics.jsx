@@ -4,6 +4,7 @@ import styles from './Statistics.module.scss';
 
 const Statistics = () => {
 	const { data } = useProfile();
+	console.log(data)
 
 	return (
 		<div className={styles.wrapper}>

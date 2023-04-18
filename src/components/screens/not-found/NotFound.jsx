@@ -8,7 +8,7 @@ import Layout from '../../layout/Layout';
 const NotFound = () => {
 	const { isAuth } = useAuth();
 	const navigate = useNavigate();
-//Navigate ta /auth page if user not loged in
+	//Navigate ta /auth page if user not loged in
 	useEffect(() => {
 		if (!isAuth) {
 			navigate('/auth');
