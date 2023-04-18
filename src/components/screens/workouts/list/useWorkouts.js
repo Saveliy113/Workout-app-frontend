@@ -25,7 +25,7 @@ export const useWorkouts = () => {
 		(workoutId) => WorkoutLogService.create(workoutId),
 		{
 			onSuccess({ data }) {
-				navigate(`/workouts/log/${data.id}`);
+				navigate(`/workout/${data.id}`);
 			}
 		}
 	);

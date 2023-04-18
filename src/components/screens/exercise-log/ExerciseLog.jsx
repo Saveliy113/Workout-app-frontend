@@ -1,7 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
 
+import { useCompleteLog } from './hooks/useCompleteLog';
 import { useExerciseLog } from './hooks/useExerciseLog';
+import { useUpdateLogTime } from './hooks/useUpdateLogTime';
 
 import Loader from '../../ui/Loader';
 import Alert from '../../ui/alert/Alert';
@@ -15,7 +17,15 @@ import TableHeader from './table/TableHeader';
 import TableRow from './table/TableRow';
 
 const ExerciseLog = () => {
-	const { exerciseLog, isSuccess, isLoading } = useExerciseLog();
+	const {
+		exerciseLog,
+		isSuccess,
+		isLoading,
+		error,
+		onChangeState,
+		getState,
+		toggleTime
+	} = useExerciseLog();
 
 	return (
 		<>
@@ -24,14 +34,20 @@ const ExerciseLog = () => {
 				className="wrapper-inner-page"
 				style={{ paddingLeft: 0, paddingRight: 0 }}
 			>
-				{/* <ExerciseErrors errors={[errorChange, errorCompleted]} /> */}
+				<ExerciseErrors errors={[error]} />
 				{isLoading ? (
 					<Loader />
 				) : (
 					<div className={styles.wrapper}>
 						<TableHeader />
-						{exerciseLog?.times.map((item, index) => (
-							<TableRow item={item} key={item.id} />
+						{exerciseLog?.times.map((item) => (
+							<TableRow
+								onChangeState={onChangeState}
+								getState={getState}
+								toggleTime={toggleTime}
+								item={item}
+								key={item.id}
+							/>
 						))}
 					</div>
 				)}

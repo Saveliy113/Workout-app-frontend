@@ -45,7 +45,7 @@ export const routes = [
 	},
 
 	{
-		path: '/workouts/log/:id',
+		path: '/workout/:id',
 		component: Workout,
 		isAuth: true
 	},
